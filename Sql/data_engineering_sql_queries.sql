@@ -206,6 +206,11 @@ SELECT *
 FROM employee
 WHERE email IS NULL;
 
+-- NOT NULL Handling
+SELECT *
+FROM employee
+WHERE email IS NOT NULL;
+
 -- 31. Subquery
 SELECT *
 FROM employee
