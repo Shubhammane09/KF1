@@ -1,871 +1,1128 @@
-
------  1) Write a query to retrieve the first name, last name, and salary of all employees.-----
-
-SELECT FIRST_NAME, LAST_NAME,SALARY FROM HR.EMPLOYEES
-
-
-------- 2) How many employees were hired in the year 2005?
-
-SELECT * FROM HR.EMPLOYEES
-WHERE HIRE_DATE LIKE  '%05';
+-- ============================================================================
+-- QUESTION 1: Retrieve first name, last name, and salary of all employees
+-- ============================================================================
+SELECT FIRST_NAME, LAST_NAME, SALARY 
+FROM HR.EMPLOYEES;
 
 
---- 3) Create a query to display the average salary of employees in each department. -----
+-- ============================================================================
+-- QUESTION 2: How many employees were hired in the year 2005?
+-- ============================================================================
+SELECT * 
+FROM HR.EMPLOYEES
+WHERE HIRE_DATE LIKE '%05';
 
-SELECT JOB_ID, AVG(SALARY) FROM HR.EMPLOYEES
+
+-- ============================================================================
+-- QUESTION 3: Display average salary of employees in each department
+-- ============================================================================
+SELECT JOB_ID, AVG(SALARY) AS avg_salary 
+FROM HR.EMPLOYEES
 GROUP BY JOB_ID;
- 
-
--------- 4) Retrieve the names and hire dates of employees who were hired BEFORE '01-JAN-2023'.---
-
-SELECT FIRST_NAME,LAST_NAME,HIRE_DATE FROM HR.EMPLOYEES
-WHERE HIRE_DATE<'01-JAN-23';
 
 
--------- 5) List the employees who have a commission percentage LESS than 0.3%.------
+-- ============================================================================
+-- QUESTION 4: Retrieve names and hire dates before 01-JAN-2023
+-- ============================================================================
+SELECT FIRST_NAME, LAST_NAME, HIRE_DATE 
+FROM HR.EMPLOYEES
+WHERE HIRE_DATE < '01-JAN-23';
 
-SELECT * FROM HR.EMPLOYEES 
-WHERE COMMISSION_PCT <0.3
+
+-- ============================================================================
+-- QUESTION 5: List employees with commission percentage LESS than 0.3%
+-- ============================================================================
+SELECT * 
+FROM HR.EMPLOYEES 
+WHERE COMMISSION_PCT < 0.3
 ORDER BY COMMISSION_PCT DESC;
 
 
--------- 6) Write a query to find the employee with the highest salary.------------
-
-SELECT EMPLOYEE_ID, MAX(SALARY) AS MAX_SALARY FROM HR.EMPLOYEES
+-- ============================================================================
+-- QUESTION 6: Find the employee with the highest salary
+-- ============================================================================
+SELECT EMPLOYEE_ID, MAX(SALARY) AS max_salary 
+FROM HR.EMPLOYEES
 GROUP BY EMPLOYEE_ID;
 
---------- 7) Display the number of employees in each job title.--------------
-  SELECT JOB_ID,COUNT(EMPLOYEE_ID) FROM HR.EMPLOYEES
-  GROUP BY JOB_ID;
 
----------- 8) Retrieve the first name, last name, and department name of all employees along with their managers names.----
-
-
-
----- 9) List employees who have a manager but are not assigned to any department.---------
+-- ============================================================================
+-- QUESTION 7: Display the number of employees in each job title
+-- ============================================================================
+SELECT JOB_ID, COUNT(EMPLOYEE_ID) AS employee_count 
+FROM HR.EMPLOYEES
+GROUP BY JOB_ID;
 
 
-
-----------10) SELECT DISTINCT HIRE_DATE FROM HR.EMPLOYEES--------------
- 
-SELECT DISTINCT HIRE_DATE FROM HR.EMPLOYEES;
-
-
-
---------- 11) Write a query to find the top 5 highest-paid employees.----------
-  
+-- ============================================================================
+-- QUESTION 8: Retrieve first name, last name, department name and manager names
+-- ============================================================================
+-- TODO: Implement this query
 
 
-------------/ 12) *Retrieve all columns from the "employees" table. ----------------
-
-SELECT * FROM HR.EMPLOYEES
-
-
-
------------  13)   Retrieve distinct job titles from the "employees" table.----------
-
-SELECT DISTINCT JOB_ID FROM HR.EMPLOYEES
+-- ============================================================================
+-- QUESTION 9: List employees with manager but no department assigned
+-- ============================================================================
+-- TODO: Implement this query
 
 
---------------14) Calculate the total number of employees in the "employees" table.--------
- 
-SELECT *  FROM HR.EMPLOYEES
+-- ============================================================================
+-- QUESTION 10: Retrieve distinct hire dates
+-- ============================================================================
+SELECT DISTINCT HIRE_DATE 
+FROM HR.EMPLOYEES;
 
 
+-- ============================================================================
+-- QUESTION 11: Find top 5 highest-paid employees
+-- ============================================================================
+-- TODO: Implement this query
 
 
-----------15) Retrieve employees whose salary is greater than 5000.--------------
+-- ============================================================================
+-- QUESTION 12: Retrieve all columns from employees table
+-- ============================================================================
+SELECT * 
+FROM HR.EMPLOYEES;
 
-SELECT * FROM HR.EMPLOYEES
+
+-- ============================================================================
+-- QUESTION 13: Retrieve distinct job titles from employees table
+-- ============================================================================
+SELECT DISTINCT JOB_ID 
+FROM HR.EMPLOYEES;
+
+
+-- ============================================================================
+-- QUESTION 14: Calculate the total number of employees in the employees table
+-- ============================================================================
+SELECT COUNT(EMPLOYEE_ID) AS total_employees 
+FROM HR.EMPLOYEES;
+
+
+-- ============================================================================
+-- QUESTION 15: Retrieve employees whose salary is greater than 5000
+-- ============================================================================
+SELECT * 
+FROM HR.EMPLOYEES
 WHERE SALARY > 5000;
 
------------16) Retrieve employees who have "Manager" in their job title.--------------
 
-SELECT * FROM HR.EMPLOYEES
+-- ============================================================================
+-- QUESTION 16: Retrieve employees with "Manager" in their job title
+-- ============================================================================
+SELECT * 
+FROM HR.EMPLOYEES
 WHERE JOB_ID LIKE '%MGR';
 
 
-----------------QUESTION -----------
+-- ============================================================================
+-- QUESTION 17: Count total number of managers in organization
+-- ============================================================================
+SELECT COUNT(MANAGER_ID) AS total_managers 
+FROM HR.EMPLOYEES;
 
 
-
-  
-
----------- 17) COUNT TOTAL NO OF MANAGERS IN ORGANISATION --------
-
-SELECT COUNT (MANAGER_ID) FROM HR.EMPLOYEES;
-
-
------------ 18) COUNT TOTAL NO OF EMPLOYEES BY JOB_ID ----
-
-SELECT  COUNT(JOB_ID) FROM HR.EMPLOYEES;
- 
------------- 19) Calculate the average salary of all employees. ---------------
-
-SELECT AVG(SALARY) FROM HR.EMPLOYEES
-
------------- 20) Retrieve employees whose last names start with the letter "S".------
-SELECT * FROM HR.EMPLOYEES
-WHERE LAST_NAME LIKE '%s';
-
---------------- 21) Calculate the total salary for all employees.----------
-
- SELECT SUM(SALARY) FROM HR.EMPLOYEES;
-
----------------- 22) Retrieve employees who were hired in the year 2002.-----------
- SELECT * FROM HR.EMPLOYEES
- WHERE HIRE_DATE LIKE '%02';
+-- ============================================================================
+-- QUESTION 18: Count total number of employees by job ID
+-- ============================================================================
+SELECT JOB_ID, COUNT(JOB_ID) AS employee_count 
+FROM HR.EMPLOYEES
+GROUP BY JOB_ID;
 
 
----------   23) Calculate the highest salary in the "employees" table.------------------
-SELECT MAX(SALARY) FROM HR.EMPLOYEES;
+-- ============================================================================
+-- QUESTION 19: Calculate the average salary of all employees
+-- ============================================================================
+SELECT AVG(SALARY) AS average_salary 
+FROM HR.EMPLOYEES;
 
-------------- 24) Retrieve employees whose commission percentage is not null.----------
-SELECT * FROM HR.EMPLOYEES
+
+-- ============================================================================
+-- QUESTION 20: Retrieve employees whose last names start with the letter "S"
+-- ============================================================================
+SELECT * 
+FROM HR.EMPLOYEES
+WHERE LAST_NAME LIKE 'S%';
+
+
+-- ============================================================================
+-- QUESTION 21: Calculate the total salary for all employees
+-- ============================================================================
+SELECT SUM(SALARY) AS total_salary 
+FROM HR.EMPLOYEES;
+
+
+-- ============================================================================
+-- QUESTION 22: Retrieve employees who were hired in the year 2002
+-- ============================================================================
+SELECT * 
+FROM HR.EMPLOYEES
+WHERE HIRE_DATE LIKE '%02';
+
+
+-- ============================================================================
+-- QUESTION 23: Calculate the highest salary in the employees table
+-- ============================================================================
+SELECT MAX(SALARY) AS highest_salary 
+FROM HR.EMPLOYEES;
+
+
+-- ============================================================================
+-- QUESTION 24: Retrieve employees with non-null commission percentage
+-- ============================================================================
+SELECT * 
+FROM HR.EMPLOYEES
 WHERE COMMISSION_PCT IS NOT NULL;
 
------------- 25) Calculate the lowest salary in the "employees" table. ------------
 
-SELECT MIN(SALARY) FROM HR.EMPLOYEES;
+-- ============================================================================
+-- QUESTION 25: Calculate the lowest salary in the employees table
+-- ============================================================================
+SELECT MIN(SALARY) AS lowest_salary 
+FROM HR.EMPLOYEES;
 
------------ 26) Retrieve employees whose salaries are between 3000 and 6000.-----------
- SELECT * FROM HR.EMPLOYEES
- WHERE SALARY BETWEEN 3000 AND 6000;
+
+-- ============================================================================
+-- QUESTION 26: Retrieve employees with salaries between 3000 and 6000
+-- ============================================================================
+SELECT * 
+FROM HR.EMPLOYEES
+WHERE SALARY BETWEEN 3000 AND 6000;
 
 
---------------- 27) Calculate the total number of employees for each job title.-----------
-
-SELECT COUNT(EMPLOYEE_ID),JOB_ID FROM HR.EMPLOYEES
+-- ============================================================================
+-- QUESTION 27: Calculate total number of employees for each job title
+-- ============================================================================
+SELECT JOB_ID, COUNT(EMPLOYEE_ID) AS employee_count 
+FROM HR.EMPLOYEES
 GROUP BY JOB_ID;
 
----------- *************28 )Retrieve employees who were hired in the last 6 months. -----------------
 
-SELECT * FROM HR.EMPLOYEES  
+-- ============================================================================
+-- QUESTION 28: Retrieve employees hired in the last 6 months
+-- ============================================================================
+SELECT * 
+FROM HR.EMPLOYEES
 WHERE HIRE_DATE > '01-OCT-2007';
- 
 
------------------29)Calculate the average salary for each job title.--------------
 
-SELECT AVG (SALARY),JOB_ID FROM HR.EMPLOYEES
+-- ============================================================================
+-- QUESTION 29: Calculate the average salary for each job title
+-- ============================================================================
+SELECT JOB_ID, AVG(SALARY) AS average_salary 
+FROM HR.EMPLOYEES
 GROUP BY JOB_ID;
 
 
-
-
-
----------- FOR CROSS CHECK USE BELOW QUERY -----------
-
-
-
-
------------ 30) Retrieve employees whose job titles are not in a predefined list.------------
-
-SELECT * FROM HR.EMPLOYEES
+-- ============================================================================
+-- QUESTION 30: Retrieve employees whose job titles are not in predefined list
+-- ============================================================================
+SELECT * 
+FROM HR.EMPLOYEES
 WHERE JOB_ID IS NOT NULL;
 
---------- IMP QUESTION QUERY ----------------
 
-
-
---------- IMP QUESTION RETRIVE EMPLOYEES WHO DOES NOT HAVE DEPARTMENT SPECIFIED ----------------
-
------------ ANSWER BY USING NORMAL QUERY---------------------
-
-------------SAME ANSWER USING JOIN CONCEPT
-
------------- CROSS-CHECK ----------------
-
-
------------- 31) Calculate the sum of salaries for employees in each department.------------
-
-SELECT SUM(SALARY),JOB_ID FROM HR.EMPLOYEES
-GROUP BY JOB_ID;
-
----------------- 32) Retrieve employees whose COMMISSIONS (IN RS.) are within 10% of their SALARIES.-----
-
-SELECT FIRST_NAME, LAST_NAME,(NVL(COMMISSION_PCT,0)* SALARY)/ 100 AS COMMISSION FROM HR.EMPLOYEES
-WHERE  (NVL(COMMISSION_PCT,0)* SALARY)/ 100 > 10;
-
-------------------- 33)RETRIVE ALL INFORMATION WHO ARE WORKING IN IT AND SALES DEPARTMENT --------
-
-SELECT * FROM HR.EMPLOYEES 
-WHERE JOB_ID='IT_PROG' OR JOB_ID='SA_MAN';
-
-
-SELECT * FROM HR.EMPLOYEES
-WHERE JOB_ID IN ('IT_PROG','SA_MAN')
-
-
-
-
-----------34) Calculate the average salary for employees in each department.--------------
-
-SELECT AVG(SALARY),JOB_ID FROM HR.EMPLOYEES
+-- ============================================================================
+-- QUESTION 31: Calculate sum of salaries for each department
+-- ============================================================================
+SELECT JOB_ID, SUM(SALARY) AS total_salary 
+FROM HR.EMPLOYEES
 GROUP BY JOB_ID;
 
 
+-- ============================================================================
+-- QUESTION 32: Retrieve employees whose commissions are within 10% of salary
+-- ============================================================================
+SELECT FIRST_NAME, LAST_NAME, 
+       (NVL(COMMISSION_PCT, 0) * SALARY) / 100 AS commission 
+FROM HR.EMPLOYEES
+WHERE (NVL(COMMISSION_PCT, 0) * SALARY) / 100 > 10;
 
------------ 35) Retrieve employees who have "IT_PROG" in their job_ID or are in department 50.----
 
-SELECT * FROM HR.EMPLOYEES
-WHERE JOB_ID = 'IT_PROG' OR DEPARTMENT_ID =50;
+-- ============================================================================
+-- QUESTION 33: Retrieve all info for IT and Sales department employees
+-- ============================================================================
+-- Method 1: Using OR
+SELECT * 
+FROM HR.EMPLOYEES 
+WHERE JOB_ID = 'IT_PROG' OR JOB_ID = 'SA_MAN';
 
--------36) Calculate the total salary for employees in each department.-----------
+-- Method 2: Using IN
+SELECT * 
+FROM HR.EMPLOYEES
+WHERE JOB_ID IN ('IT_PROG', 'SA_MAN');
 
-SELECT SUM(SALARY),JOB_ID FROM HR.EMPLOYEES
-GROUP BY  JOB_ID;
 
--------- WHAT ABOUT EMPLOYEE WHO DON'T HAVE ANY DEPARTMENT ASSIGN
+-- ============================================================================
+-- QUESTION 34: Calculate average salary for each department
+-- ============================================================================
+SELECT JOB_ID, AVG(SALARY) AS average_salary 
+FROM HR.EMPLOYEES
+GROUP BY JOB_ID;
 
-SELECT * FROM HR.EMPLOYEES
+
+-- ============================================================================
+-- QUESTION 35: Employees with IT_PROG or in department 50
+-- ============================================================================
+SELECT * 
+FROM HR.EMPLOYEES
+WHERE JOB_ID = 'IT_PROG' OR DEPARTMENT_ID = 50;
+
+
+-- ============================================================================
+-- QUESTION 36: Calculate total salary for each department
+-- ============================================================================
+SELECT JOB_ID, SUM(SALARY) AS total_salary 
+FROM HR.EMPLOYEES
+GROUP BY JOB_ID;
+
+
+-- ============================================================================
+-- QUESTION 36b: Employees without department assigned
+-- ============================================================================
+SELECT * 
+FROM HR.EMPLOYEES
 WHERE DEPARTMENT_ID IS NULL;
 
--------- 37) Retrieve employees whose salaries are the same as their manager's salary.
 
- 
+-- ============================================================================
+-- QUESTION 37: Employees whose salaries match their manager's salary
+-- ============================================================================
+-- TODO: Implement this query
 
- 
-------------IMP QUESTION --------------------------
 
-
---------- 38) Calculate the number of employees for each manager. ------------------
-
-SELECT COUNT(EMPLOYEE_ID),MANAGER_ID FROM HR.EMPLOYEES
+-- ============================================================================
+-- QUESTION 38: Calculate number of employees for each manager
+-- ============================================================================
+SELECT MANAGER_ID, COUNT(EMPLOYEE_ID) AS employee_count 
+FROM HR.EMPLOYEES
 GROUP BY MANAGER_ID;
 
--------------------
 
-select * from hr.regions;
-select * from hr.countries;
- select * from hr.locations;
- select * from hr.departments;
- select * from hr.jobs;
- select * from hr.employees;
-
--------- ******  -----
-
---39)Retrieve employees who have a "C" in their last names and "E" in their first names.---
-
-SELECT * FROM HR.EMPLOYEES
+-- ============================================================================
+-- QUESTION 39: Employees with "C" in last name and "E" in first name
+-- ============================================================================
+SELECT * 
+FROM HR.EMPLOYEES
 WHERE LAST_NAME LIKE '%c%' AND FIRST_NAME LIKE '%e%';
 
 
-
------- MAY THIS IS USEFUL FOR THIS  39) QUESTION------->  SELECT INSTR('Brain-Woraks',1) FROM DUAL;--------
-
-
-
-
----------- 40) Calculate the highest salary for each department.----------
-
-SELECT MAX(SALARY),DEPARTMENT_ID FROM HR.EMPLOYEES
+-- ============================================================================
+-- QUESTION 40: Calculate highest salary for each department
+-- ============================================================================
+SELECT DEPARTMENT_ID, MAX(SALARY) AS highest_salary 
+FROM HR.EMPLOYEES
 GROUP BY DEPARTMENT_ID;
 
-------- ******** 41) Retrieve employees whose hire date is not the first day of the month.----------
 
-SELECT * FROM HR.EMPLOYEES
+-- ============================================================================
+-- QUESTION 41: Employees whose hire date is not the first day of month
+-- ============================================================================
+SELECT * 
+FROM HR.EMPLOYEES
 WHERE HIRE_DATE NOT LIKE '01%';
- 
--------- 42) Calculate the lowest salary for each department.--------------
 
-SELECT MIN(SALARY),DEPARTMENT_ID FROM HR.EMPLOYEES
+
+-- ============================================================================
+-- QUESTION 42: Calculate lowest salary for each department
+-- ============================================================================
+SELECT DEPARTMENT_ID, MIN(SALARY) AS lowest_salary 
+FROM HR.EMPLOYEES
 GROUP BY DEPARTMENT_ID;
 
---------- **** 43) Retrieve employees whose salaries are higher than their department's average salary.--------
 
-SELECT EMPLOYEE_ID, DEPARTMENT_ID,MAX (SALARY), AVG (SALARY) FROM HR.EMPLOYEES
+-- ============================================================================
+-- QUESTION 43: Employees with salary higher than department average
+-- ============================================================================
+SELECT EMPLOYEE_ID, DEPARTMENT_ID, MAX(SALARY) AS max_salary, 
+       AVG(SALARY) AS avg_salary 
+FROM HR.EMPLOYEES
 GROUP BY EMPLOYEE_ID, DEPARTMENT_ID;
 
-/*-------- 44) RETRIVE STATUS IF EMPLOYEES SALARY IS > THAN AVERAGE SALARY OF ALL THE EMPLOYEES
-              THEN WRITE YES IN FRONT OF EMPLOYEE 
-              ELSE WRITE NO AS STATUS */
+
+-- ============================================================================
+-- QUESTION 44: Mark employee salary status vs average
+-- ============================================================================
+/*
+Retrieve status if employee salary > average salary of all employees
+THEN write YES otherwise write NO as status
+*/
+-- TODO: Implement this query
 
 
+-- ============================================================================
+-- QUESTION 45: Calculate total salary for each manager
+-- ============================================================================
+-- TODO: Implement this query
 
 
-
-
- --------- **** NOT SOLVED ****  45) Calculate the total salary for each manager.------------
- 
-
-
-
- 
------------ 46) Retrieve employees who do not have managers. ----------
-
-SELECT * FROM HR.EMPLOYEES
+-- ============================================================================
+-- QUESTION 46: Retrieve employees who do not have managers
+-- ============================================================================
+SELECT * 
+FROM HR.EMPLOYEES
 WHERE MANAGER_ID IS NULL;
 
----------- 47) Calculate the average salary for each manager.---------------
 
-SELECT AVG(SALARY),MANAGER_ID FROM HR.EMPLOYEES
-GROUP BY MANAGER_ID;
-
----------******** 48) Retrieve employees who earn the highest salary in their department.------------
-
-SELECT MAX (SALARY)
-
------------- 49) Calculate the sum of salaries for each manager.----------
-
-select sum (salary), MANAGER_ID FROM HR.EMPLOYEES
+-- ============================================================================
+-- QUESTION 47: Calculate average salary for each manager
+-- ============================================================================
+SELECT MANAGER_ID, AVG(SALARY) AS average_salary 
+FROM HR.EMPLOYEES
 GROUP BY MANAGER_ID;
 
 
---------- confusion in question 50)--------------------------
-----------50) Retrieve employees who have at least one of their job titles in uppercase.-------
+-- ============================================================================
+-- QUESTION 48: Retrieve employees earning highest salary in department
+-- ============================================================================
+-- TODO: Implement this query
 
 
+-- ============================================================================
+-- QUESTION 49: Calculate sum of salaries for each manager
+-- ============================================================================
+SELECT MANAGER_ID, SUM(SALARY) AS total_salary 
+FROM HR.EMPLOYEES
+GROUP BY MANAGER_ID;
 
 
---------------- 51) Calculate the number of employees for each job title and department combination.-----
+-- ============================================================================
+-- QUESTION 50: Employees with job titles in uppercase
+-- ============================================================================
+-- TODO: Implement this query
 
-SELECT COUNT(EMPLOYEE_ID), JOB_ID,DEPARTMENT_ID FROM HR.EMPLOYEES
+
+-- ============================================================================
+-- QUESTION 51: Count employees for each job/department combination
+-- ============================================================================
+SELECT JOB_ID, DEPARTMENT_ID, COUNT(EMPLOYEE_ID) AS employee_count 
+FROM HR.EMPLOYEES
 GROUP BY DEPARTMENT_ID, JOB_ID;
 
 
------------ 52) Retrieve employees who do not earn any commission.----
-
-SELECT * FROM HR.EMPLOYEES 
+-- ============================================================================
+-- QUESTION 52: Retrieve employees who do not earn any commission
+-- ============================================================================
+SELECT * 
+FROM HR.EMPLOYEES 
 WHERE COMMISSION_PCT IS NULL;
 
---- 53) Calculate the average salary for employees in each job title and department combination.---
 
-SELECT AVG (SALARY),JOB_ID, DEPARTMENT_ID FROM HR.EMPLOYEES
+-- ============================================================================
+-- QUESTION 53: Average salary by job title and department combination
+-- ============================================================================
+SELECT JOB_ID, DEPARTMENT_ID, AVG(SALARY) AS average_salary 
+FROM HR.EMPLOYEES
 GROUP BY JOB_ID, DEPARTMENT_ID
-ORDER BY DEPARTMENT_ID ;
-  
---------- OR ---------
+ORDER BY DEPARTMENT_ID;
 
 
- ------ 54) Retrieve employees whose hire dates fall on weekends (Saturday or Sunday).
+-- ============================================================================
+-- QUESTION 54: Employees hired on weekends (Saturday or Sunday)
+-- ============================================================================
+-- TODO: Implement this query
 
 
- 
---------- 55) Calculate the total salary for employees in each job title and department combination.-----
-
-SELECT SUM(SALARY),JOB_ID,DEPARTMENT_ID FROM HR.EMPLOYEES
-GROUP BY JOB_ID,DEPARTMENT_ID ;
-
---56)Retrieve employees whose salaries are greater than the average salary of their job title.
-
-
-
---57)Calculate the highest salary for employees in each job title and department combination.
-
-SELECT MAX(SALARY),JOB_ID,DEPARTMENT_ID FROM HR.EMPLOYEES
+-- ============================================================================
+-- QUESTION 55: Total salary by job title and department combination
+-- ============================================================================
+SELECT JOB_ID, DEPARTMENT_ID, SUM(SALARY) AS total_salary 
+FROM HR.EMPLOYEES
 GROUP BY JOB_ID, DEPARTMENT_ID;
 
 
---58)Retrieve employees whose salaries are below the overall average salary.
+-- ============================================================================
+-- QUESTION 56: Employees with salary > average of their job title
+-- ============================================================================
+-- TODO: Implement this query
 
 
-
---59)Calculate the lowest salary for employees in each job title and department combination.
-
-SELECT MIN(SALARY), JOB_ID, DEPARTMENT_ID FROM HR.EMPLOYEES
-GROUP BY JOB_ID,DEPARTMENT_ID;
-
-
---60)Retrieve employees whose job titles contain the word "Manager".
+-- ============================================================================
+-- QUESTION 57: Highest salary by job/department combination
+-- ============================================================================
+SELECT JOB_ID, DEPARTMENT_ID, MAX(SALARY) AS highest_salary 
+FROM HR.EMPLOYEES
+GROUP BY JOB_ID, DEPARTMENT_ID;
 
 
+-- ============================================================================
+-- QUESTION 58: Employees with salary below overall average
+-- ============================================================================
+-- TODO: Implement this query
 
 
---61)Calculate the sum of salaries for employees in each job title and department combination.
+-- ============================================================================
+-- QUESTION 59: Lowest salary by job/department combination
+-- ============================================================================
+SELECT JOB_ID, DEPARTMENT_ID, MIN(SALARY) AS lowest_salary 
+FROM HR.EMPLOYEES
+GROUP BY JOB_ID, DEPARTMENT_ID;
 
 
+-- ============================================================================
+-- QUESTION 60: Employees whose job titles contain "Manager"
+-- ============================================================================
+-- TODO: Implement this query
 
 
-
---62)Retrieve employees who have been with the company for at least 10 years.
-
-
-
-
-
---63)Calculate the average salary for employees who have the letter "A" in their last names.
+-- ============================================================================
+-- QUESTION 61: Sum of salaries by job/department combination
+-- ============================================================================
+-- TODO: Implement this query
 
 
+-- ============================================================================
+-- QUESTION 62: Employees with company tenure of at least 10 years
+-- ============================================================================
+-- TODO: Implement this query
 
 
---64)Retrieve employees whose salaries are the second-highest in their department.
+-- ============================================================================
+-- QUESTION 63: Average salary for employees with "A" in last name
+-- ============================================================================
+-- TODO: Implement this query
 
 
+-- ============================================================================
+-- QUESTION 64: Employees with second-highest salary in department
+-- ============================================================================
+-- TODO: Implement this query
 
 
+-- ============================================================================
+-- QUESTION 65: Total salary for employees hired in odd-numbered years
+-- ============================================================================
+-- TODO: Implement this query
 
 
-
---65)Calculate the total salary for employees who were hired in odd-numbered years.
-
-
-
-
-
---  66) EXTRACT MONTH FROM HIRE_DATE
-
-SELECT FIRST_NAME, LAST_NAME, EXTRACT(MONTH FROM HIRE_DATE) AS HIRE_MONTH FROM HR.EMPLOYEES
+-- ============================================================================
+-- QUESTION 66: Extract month from hire date
+-- ============================================================================
+SELECT FIRST_NAME, LAST_NAME, EXTRACT(MONTH FROM HIRE_DATE) AS hire_month 
+FROM HR.EMPLOYEES;
 
 
--- 67) EXTRACT DAY FROM HIRE_DAY (USE EXTRACT OPERATOR )
-
-SELECT FIRST_NAME, LAST_NAME, EXTRACT (DAY FROM HIRE_DATE) AS HIRE_DAY FROM HR.EMPLOYEES;
-
-
--- 68) EXTRACT YEAR  OF WEEK FROM HIRE_DATE 
-
-
-SELECT FIRST_NAME, LAST_NAME, EXTRACT (YEAR FROM HIRE_DATE) AS HIRE_YEAR FROM HR.EMPLOYEES
+-- ============================================================================
+-- QUESTION 67: Extract day from hire date
+-- ============================================================================
+SELECT FIRST_NAME, LAST_NAME, EXTRACT(DAY FROM HIRE_DATE) AS hire_day 
+FROM HR.EMPLOYEES;
 
 
-/*  69)RETRIVE THE DATA OF  OF THE EMPLOYEES FIRST NAME , LAST NAME ,JOB_ID AND MANAGERS
- WHOSE ASSIGNED TO THE EACH EMPLOYEE CONCATE MANAGER NAMES USING || , AND USING SELF JOIN . */
+-- ============================================================================
+-- QUESTION 68: Extract year from hire date
+-- ============================================================================
+SELECT FIRST_NAME, LAST_NAME, EXTRACT(YEAR FROM HIRE_DATE) AS hire_year 
+FROM HR.EMPLOYEES;
 
 
+-- ============================================================================
+-- QUESTION 69: Employee info with manager names using self join
+-- ============================================================================
+/*
+Retrieve first name, last name, job ID and manager names
+Concatenate manager names using ||
+Use self join
+*/
+-- TODO: Implement this query
 
--- 70) FIND THE INFORMTION OF TH EMPLOYEE WHO HAVE SALARY GRATER THAN 10000
 
-SELECT * FROM HR.EMPLOYEES
+-- ============================================================================
+-- QUESTION 70: Find employees with salary greater than 10000
+-- ============================================================================
+SELECT * 
+FROM HR.EMPLOYEES
 WHERE SALARY > 10000;
 
 
--- 71) FIND THE INFORMATION ABOUT THE EMPLOYEE WHO HAVE SALARY GREATER THAN 5000 AND MANAGER_ID  100
-
-SELECT * FROM HR.EMPLOYEES
-WHERE SALARY > 5000 AND MANAGER_ID=100;
-
-
-
---72 ) FIND THE INFORMATION ABOUT THE EMPLOYEES WHO IS JOB_ID IS IT_PROG OR THE SALARY IS LESS THAN 25000
-
-SELECT * FROM HR.EMPLOYEES 
-WHERE JOB_ID = 'IT_PROG'
- OR SALARY < 25000;
+-- ============================================================================
+-- QUESTION 71: Employees with salary > 5000 and manager ID = 100
+-- ============================================================================
+SELECT * 
+FROM HR.EMPLOYEES
+WHERE SALARY > 5000 AND MANAGER_ID = 100;
 
 
-/*   73) LAY THE FIRST_NAME , LAST_NAME, EMPLOYEE_ID , SALARY , PHONE_NUMBER , HIRE_DATE AND 
- ORDER BY SALARY*/
- 
-SELECT FIRST_NAME, LAST_NAME, EMPLOYEE_ID, SALARY, CONTACT_NUMBER, HIRE_DATE FROM HR.EMPLOYEES
+-- ============================================================================
+-- QUESTION 72: Employees with IT_PROG job or salary < 25000
+-- ============================================================================
+SELECT * 
+FROM HR.EMPLOYEES 
+WHERE JOB_ID = 'IT_PROG' OR SALARY < 25000;
+
+
+-- ============================================================================
+-- QUESTION 73: Display employee info ordered by salary
+-- ============================================================================
+SELECT FIRST_NAME, LAST_NAME, EMPLOYEE_ID, SALARY, CONTACT_NUMBER, HIRE_DATE 
+FROM HR.EMPLOYEES
 ORDER BY SALARY;
- 
 
 
- /*   74)  DISPLAY THE INFORMATION OF EMPLOYEE WHICH HAVE FIRST_NAME TJ, KI,GUY, DONALD */
- 
-
-SELECT * FROM HR.EMPLOYEES 
+-- ============================================================================
+-- QUESTION 74: Display employees with specific first names
+-- ============================================================================
+SELECT * 
+FROM HR.EMPLOYEES 
 WHERE FIRST_NAME IN ('TJ', 'Ki', 'Guy', 'Donald');
 
 
+-- ============================================================================
+-- QUESTION 75: Employees except specific job IDs
+-- ============================================================================
+SELECT * 
+FROM HR.EMPLOYEES
+WHERE JOB_ID NOT IN ('IT_PROG', 'PU_CLERK', 'ST_CLERK');
 
--- 75)  DISPLAY THE INFORMATION OF THE EMPLOYEES EXECEPT IT_PTOG , PU_CLERK , ST_CLERK,
 
-SELECT * FROM HR.EMPLOYEES
-WHERE JOB_ID IN ('IT_PROG', 'PU_CLERK', 'ST_CLERK');
-
-
-
--- 77) DISPALY ALL THE INFORMATION OF THE EMPLOYEES WHICH THE COMMISSION IS NOT GIVEN 
-
-SELECT * FROM HR.EMPLOYEES 
+-- ============================================================================
+-- QUESTION 77: Employees without commission
+-- ============================================================================
+SELECT * 
+FROM HR.EMPLOYEES 
 WHERE COMMISSION_PCT IS NULL;
 
 
--- 78) DISPLAY ALL THE INFORMATION OF THE EMPLOYEES WHICH THE COMMISSION IS GIVEN 
-
-SELECT * FROM HR.EMPLOYEES 
+-- ============================================================================
+-- QUESTION 78: Employees with commission
+-- ============================================================================
+SELECT * 
+FROM HR.EMPLOYEES 
 WHERE COMMISSION_PCT IS NOT NULL;
 
 
--- 79)   DISPALY THE THE INFORMATION  OF EMPLOYEES WHICH HAVE SAVE SALARY DETWEEN 15000 AND 18000
- 
-SELECT * FROM HR.EMPLOYEES
+-- ============================================================================
+-- QUESTION 79: Employees with salary between 15000 and 18000
+-- ============================================================================
+SELECT * 
+FROM HR.EMPLOYEES
 WHERE SALARY BETWEEN 15000 AND 18000;
- 
 
- --80)   DISPAY THE EMPLOYEE DETAILS EHO'S NAME NOT START WITH D
- 
-SELECT * FROM HR.EMPLOYEES
+
+-- ============================================================================
+-- QUESTION 80: Employees whose names do not start with "D"
+-- ============================================================================
+SELECT * 
+FROM HR.EMPLOYEES
 WHERE FIRST_NAME NOT LIKE 'D%';
 
- 
- -- 81) DISPLAY THE INFORMATION OF THE EMPLOYEES WHO'S LAST_NAME NOT START WITH S 
- 
 
-SELECT * FROM HR.EMPLOYEES
+-- ============================================================================
+-- QUESTION 81: Employees whose last name does not start with "S"
+-- ============================================================================
+SELECT * 
+FROM HR.EMPLOYEES
 WHERE LAST_NAME NOT LIKE 'S%';
 
 
--- 82) SHOW THE INFORMATION OF THE EMPLOYEES WHICH HAVE LETTER R IN THEIR FIRST_NAME 
-
-SELECT * FROM HR.EMPLOYEES 
+-- ============================================================================
+-- QUESTION 82: Employees with letter "R" in first name
+-- ============================================================================
+SELECT * 
+FROM HR.EMPLOYEES 
 WHERE FIRST_NAME LIKE '%r%';
 
 
---83)  THE DETAILS OF THE EMPLOYEES WHICH HAVE FIRST_NAME  4TH LATTER P 
-
-SELECT * FROM HR.EMPLOYEES
-WHERE FIRST_NAME LIKE '___p%' ;
-
-
--- 84)  SELECT THE EMPLOYEES WHO'S PHONE NUMBER  START WITH  650
-
-
-SELECT * FROM HR.EMPLOYEES
-WHERE CONTACT_NUMBER LIKE '650%' ;
-
---85) ADD THE COMMISSION PCT AND SALARY 
-
-SELECT FIRST_NAME, LAST_NAME, SALARY, COMMISSION_PCT, (NVL ( COMMISSION_PCT, 0) + SALARY) AS MONTHLY_SALARY FROM HR.EMPLOYEES
+-- ============================================================================
+-- QUESTION 83: Employees with "P" as 4th character in first name
+-- ============================================================================
+SELECT * 
+FROM HR.EMPLOYEES
+WHERE FIRST_NAME LIKE '___p%';
 
 
--- 86)  DISPLAY  TOTAL COMMISSION GIVEN TO THE EACH EMPLOYEE IN SALARY
+-- ============================================================================
+-- QUESTION 84: Employees whose phone number starts with 650
+-- ============================================================================
+SELECT * 
+FROM HR.EMPLOYEES
+WHERE CONTACT_NUMBER LIKE '650%';
 
 
- 
--- 87) DISPLAY TOTAL ANNUAL SALARY AND ADD GIVEN PERCENTAGE TO THE EACH  EMPLOYEE 
+-- ============================================================================
+-- QUESTION 85: Commission + Salary calculation
+-- ============================================================================
+SELECT FIRST_NAME, LAST_NAME, SALARY, COMMISSION_PCT, 
+       (NVL(COMMISSION_PCT, 0) + SALARY) AS monthly_salary 
+FROM HR.EMPLOYEES;
 
 
+-- ============================================================================
+-- QUESTION 86: Total commission given to each employee in salary
+-- ============================================================================
+-- TODO: Implement this query
 
--- 88) Select all records where the value of the job title column starts with the letter "A".
 
-SELECT * FROM HR.EMPLOYEES
+-- ============================================================================
+-- QUESTION 87: Annual salary with percentage addition
+-- ============================================================================
+-- TODO: Implement this query
+
+
+-- ============================================================================
+-- QUESTION 88: Job titles starting with letter "A"
+-- ============================================================================
+SELECT * 
+FROM HR.EMPLOYEES
 WHERE JOB_ID LIKE 'A%';
 
 
- -- 89) Select all records where the value of the job title column ends with the letter "T".
- 
-
-SELECT * FROM HR.EMPLOYEES
+-- ============================================================================
+-- QUESTION 89: Job titles ending with letter "T"
+-- ============================================================================
+SELECT * 
+FROM HR.EMPLOYEES
 WHERE JOB_ID LIKE '%T';
 
 
--- 90) RETRIVE THE SALARY OF THE EMPLOYEES WHOSE SALARY IS EQUAL TO 10000
-
-SELECT *  FROM HR.EMPLOYEES
+-- ============================================================================
+-- QUESTION 90: Employees with salary equal to 10000
+-- ============================================================================
+SELECT * 
+FROM HR.EMPLOYEES
 WHERE SALARY = 10000;
 
---91)  ORDER BY FIRST_NAME ASCENDING 
 
-SELECT FIRST_NAME FROM HR.EMPLOYEES
+-- ============================================================================
+-- QUESTION 91: Order employees by first name (ascending)
+-- ============================================================================
+SELECT FIRST_NAME 
+FROM HR.EMPLOYEES
 ORDER BY FIRST_NAME;
 
 
---92) ORDER BY  LAST NAME DESCENDING 
-
-SELECT LAST_NAME FROM HR.EMPLOYEES
+-- ============================================================================
+-- QUESTION 92: Order employees by last name (descending)
+-- ============================================================================
+SELECT LAST_NAME 
+FROM HR.EMPLOYEES
 ORDER BY LAST_NAME DESC;
 
---93)SELECT MULTIPLE COLUMNS FROMM TABLE 
 
-SELECT * FROM HR.EMPLOYEES;
-
---94)CONCAT  FIRST NAME AND LAST_NAME 
-
-SELECT CONCAT (FIRST_NAME, LAST_NAME) FROM HR.EMPLOYEES;
---
-SELECT FIRST_NAME || LAST_NAME FROM HR.EMPLOYEES;
--- 
-SELECT FIRST_NAME ||' '|| LAST_NAME FROM HR.EMPLOYEES;
+-- ============================================================================
+-- QUESTION 93: Select multiple columns from employees table
+-- ============================================================================
+SELECT * 
+FROM HR.EMPLOYEES;
 
 
--- 95)RETRIVE THE EMPLOYEES DATA WHOSE SALARY IS BETWEEN 5000 AND 25000
+-- ============================================================================
+-- QUESTION 94: Concatenate first name and last name
+-- ============================================================================
+-- Method 1: Using CONCAT function
+SELECT CONCAT(FIRST_NAME, LAST_NAME) AS full_name 
+FROM HR.EMPLOYEES;
 
-SELECT * FROM HR.EMPLOYEES
+-- Method 2: Using concatenation operator ||
+SELECT FIRST_NAME || LAST_NAME AS full_name 
+FROM HR.EMPLOYEES;
+
+-- Method 3: With space between names
+SELECT FIRST_NAME || ' ' || LAST_NAME AS full_name 
+FROM HR.EMPLOYEES;
+
+
+-- ============================================================================
+-- QUESTION 95: Employees with salary between 5000 and 25000
+-- ============================================================================
+SELECT * 
+FROM HR.EMPLOYEES
 WHERE SALARY BETWEEN 5000 AND 25000;
 
 
---96)   GIVE ROWNUM TO THE FIRST NAME 
-
- SELECT ROWNUM, FIRST_NAME FROM HR.EMPLOYEES
-
--- 97)  RETRIVE THE LAST NAME OF THE EMPPLOYEES 
-
-SELECT LAST_NAME FROM HR.EMPLOYEES
+-- ============================================================================
+-- QUESTION 96: Add row number to first name
+-- ============================================================================
+SELECT ROWNUM, FIRST_NAME 
+FROM HR.EMPLOYEES;
 
 
--- 98)  RETRIVE THE DATA OF THE EMPLOYEES WHOSE LAST NAME IS KING , POPP,ABEL
+-- ============================================================================
+-- QUESTION 97: Retrieve last name of employees
+-- ============================================================================
+SELECT LAST_NAME 
+FROM HR.EMPLOYEES;
 
-SELECT * FROM HR.EMPLOYEES
-WHERE LAST_NAME IN ('King','Popp', 'Abel');
+
+-- ============================================================================
+-- QUESTION 98: Employees with specific last names
+-- ============================================================================
+SELECT * 
+FROM HR.EMPLOYEES
+WHERE LAST_NAME IN ('King', 'Popp', 'Abel');
 
 
--- 99)  RETRVE THE DATA OF THE EMPLOYEES WHO IS DEPARTMENT 80,90,100 
+-- ============================================================================
+-- QUESTION 99: Employees in departments 80, 90, 100
+-- ============================================================================
+SELECT * 
+FROM HR.EMPLOYEES
+WHERE DEPARTMENT_ID IN ('80', '90', '100');
 
-SELECT * FROM HR.EMPLOYEES
-WHERE DEPARTMENT_ID IN ('80','90','100');
 
---100)  RETRIVE THE INFO OF THE EMPLOYEES WHOSE COMMISSION_PCT IS NOT NULL  
-
-SELECT * FROM HR.EMPLOYEES
+-- ============================================================================
+-- QUESTION 100: Employees with non-null commission percentage
+-- ============================================================================
+SELECT * 
+FROM HR.EMPLOYEES
 WHERE COMMISSION_PCT IS NOT NULL;
 
--- 101)  RETRIVE THE INFORMATON OF THE EMPLOYEES WHOSE JOB ID IS SALESMEN AND FIRST NAME IS JOHN 
-  
-SELECT * FROM HR.EMPLOYEES
+
+-- ============================================================================
+-- QUESTION 101: Employees with specific first name and job ID
+-- ============================================================================
+SELECT * 
+FROM HR.EMPLOYEES
 WHERE FIRST_NAME = 'John' AND JOB_ID = 'SA_MAN';
 
--- 102)  RETRIVE THE INFORMATION OF THE EMPLOYEES WHOSE EMPLOYEE ID IS 80 NAD SALARY IS GREater than 12000
 
+-- ============================================================================
+-- QUESTION 102: Employees with specific ID and salary > 12000
+-- ============================================================================
+-- TODO: Implement this query
 
 
--- 103)   fetch the data of the employees whose SALARY IS 9000 AND COMMISSION_PCT IS NOT NULL 
+-- ============================================================================
+-- QUESTION 103: Employees with salary 9000 and commission percentage not null
+-- ============================================================================
+-- TODO: Implement this query
 
-  
 
---104)   RETRIVE THE DSTS OF THE EMPLOYEES WHOSE MANAGER ID IS GRERATER THAN 100 AND HIRE DATE IS BEFORE 01 Jan 2006 
+-- ============================================================================
+-- QUESTION 104: Employees with manager ID > 100 and hire date before 01-JAN-2006
+-- ============================================================================
+-- TODO: Implement this query
 
 
--- 105)   RETRIVE THE DATA WHOSE MANAGER ID IS GRATER THAN 100 OR  LAST NAME IS KING  
+-- ============================================================================
+-- QUESTION 105: Employees with manager ID > 100 or last name KING
+-- ============================================================================
+-- TODO: Implement this query
 
 
+-- ============================================================================
+-- QUESTION 106: Employees with salary >= 9000 or job ID = IT_PROG
+-- ============================================================================
+-- TODO: Implement this query
 
 
--- 106)   RETRIVE THE DATA OF THE EMPLOYEES WHOSE SALARY OS GREATER THAN OR EQUAL TO THE 9000 OR JOB ID IS IT PROG 
+-- ============================================================================
+-- QUESTION 107: Employees not in IT_PROG, FI_MANAGER, or AD_VP
+-- ============================================================================
+-- TODO: Implement this query
 
 
+-- ============================================================================
+-- QUESTION 108: Employees with salary not in (9000, 7800, 1100)
+-- ============================================================================
+-- TODO: Implement this query
 
--- 107)   RETRIVE THE INFORMATION OF THE EMPLOYEE EHOSE NOT IN IT PROG AND FI MANAGER AND AD VP 
 
+-- ============================================================================
+-- QUESTION 109: Employees whose job ID is not IT_PROG
+-- ============================================================================
+-- TODO: Implement this query
 
--- 108)   RETRIVE THE INFORMATION OF THE EMPLOYEES WHOSE SALARY NOT IN 9000,7800,1100
- 
 
---108)   RETRIVE THE INFORMATION OF THE EMPLOYEES WHOSE SALARY IS NOT EQUAL TO 12000
+-- ============================================================================
+-- QUESTION 110: Total salary grouped by manager ID
+-- ============================================================================
+-- TODO: Implement this query
 
 
--- 109)   RETRIVE THE INFORMATION OF THE EMPLOYEE WHOSE NOT IN IT PROG 
+-- ============================================================================
+-- QUESTION 111: Total count of employees grouped by job ID
+-- ============================================================================
+-- TODO: Implement this query
 
 
+-- ============================================================================
+-- QUESTION 112: Add TOTAL column (NUMBER datatype) to employees table
+-- ============================================================================
+-- TODO: Implement this query
 
 
+-- ============================================================================
+-- QUESTION 113: Average salary and count for specific employee IDs
+-- ============================================================================
+/*
+Calculate AVG salary and total count of employees
+For employee IDs 101, 103, 104
+Order by employee ID ascending
+*/
+-- TODO: Implement this query
 
--- 110)   CALCULATE THE TOTAL OF THE SALARY OF EMPLOYEES AND GROUP IT BY MANAGER ID 
 
+-- ============================================================================
+-- QUESTION 114: Delete TOTAL column from employees table
+-- ============================================================================
+-- TODO: Implement this query
 
 
---  111)  RETRIVE THE TOTSL COUNT OF THE THE EMPLOYEES ABD GROUP IT BY JOB ID 
+-- ============================================================================
+-- QUESTION 115: Employee details ordered by employee ID (descending)
+-- ============================================================================
+-- TODO: Implement this query
 
 
+-- ============================================================================
+-- QUESTION 116: Employee first name, last name, job ID and manager ID
+-- ============================================================================
+-- TODO: Implement this query
 
 
+-- ============================================================================
+-- QUESTION 117: Employees with IT_PROG job ID
+-- ============================================================================
+-- TODO: Implement this query
 
-  -- 112 ) ADD COLUMN TOTAL AND ITS DATATYPE SHOULD BE NUMBER TO THE HR.EMPLOYEES 
 
+-- ============================================================================
+-- QUESTION 118: Modify TOTAL column datatype from INT to NUMBER
+-- ============================================================================
+-- TODO: Implement this query
 
 
+-- ============================================================================
+-- QUESTION 119: Distinct first name and last name
+-- ============================================================================
+-- TODO: Implement this query
 
--- 113)CALCULATE AVG SALARY , TOTAL COUNT OF TH EMPLOYEES WHOSE EMPLOYEE_ID IS 101,103 ,104  AND ORDER EMPLOYEE ID ASC 
 
+-- ============================================================================
+-- QUESTION 120: Employees with salary between 10000 and 20000
+-- ============================================================================
+-- TODO: Implement this query
 
 
+-- ============================================================================
+-- QUESTION 121: Employees with salary between 10000 and 15000
+-- ============================================================================
+-- TODO: Implement this query
 
----114)   DELETE COLUMN TOTAL FROM HR. MEPLOYEES 
 
+-- ============================================================================
+-- QUESTION 122: Last name, first name, ID, salary and annual salary
+-- ============================================================================
+-- TODO: Implement this query
 
--- 115 )  RETRIVE FIRST NAME LAST NAME EMPLOYEE ID , AND ORDER THE DATA  DESCENDING ORDER ON THE BASIS OF THE EMPLOYEE _ID 
 
- 
- 
---116)   RETRIVE FIRST_NAME , LAST NAME , JOB_ID , NAMAGER ID FRON EMPLOYEES TABLE 
+-- ============================================================================
+-- QUESTION 123: Employee ID, commission percentage, salary and total
+-- ============================================================================
+-- TODO: Implement this query
 
 
+-- ============================================================================
+-- QUESTION 124: Commission percentage in RS format
+-- ============================================================================
+-- TODO: Implement this query
 
- 
---117)   RETRIVE THE DATA OF THE EMPLOYEES WHOSE JOB_ID IS IT_PROG  
 
- 
+-- ============================================================================
+-- QUESTION 125: Total salary given to all employees
+-- ============================================================================
+-- TODO: Implement this query
 
 
+-- ============================================================================
+-- QUESTION 126: Rename commission_pct to commission_percentage
+-- ============================================================================
+-- TODO: Implement this query
 
--- 118 ) MODIFY COLUMN  TOTAL COLUMN DATATYPE FROM INT TO NUMBER 
 
- 
-  -- 119) DISTINCT FIRST NAME AND LAST NAME FROM  EMPLOYEE TABLE 
+-- ============================================================================
+-- QUESTION 127: Full name (concatenation of first and last name)
+-- ============================================================================
+-- TODO: Implement this query
 
 
+-- ============================================================================
+-- QUESTION 128: Department name and average salary by department
+-- ============================================================================
+-- TODO: Implement this query
 
- -- 120)  RETRIVE THE DAT OF THE EMPLOYEES RHOSE SALARY IS BETWEEN 10000 AND 20000
 
--- 121) RETRIVE THE DATA OF THE EMPLOYEES WHOSE SALARY IS BETEEEN 10000 AND 15000
+-- ============================================================================
+-- QUESTION 129: Employees with phone containing '555' but not '123'
+-- ============================================================================
+-- TODO: Implement this query
 
- 
 
+-- ============================================================================
+-- QUESTION 130: Employees with salary NOT between 5000 and 10000
+-- ============================================================================
+-- TODO: Implement this query
 
--- 120) RETRIVE THE ALL THE DATA OF THE EMPLOYEES USING ALIAS NAME 
 
+-- ============================================================================
+-- QUESTION 131: Employees in same department as Programmers
+-- ============================================================================
+-- TODO: Implement this query
 
--- 121)  RETRIVE THE LAST DATA INSERTED INTO THE EMPLOYEE TABLE 
--- where represents which column data we require and order by represents the last inserted data ,
 
+-- ============================================================================
+-- QUESTION 132: Employees with email not containing 'gmail'
+-- ============================================================================
+-- TODO: Implement this query
 
--- 122) RETRIVE THE LAST NAME , FIRST NAME , EMPLOYEE ID , SALARY AND ANNUAL SALARY OF THE EACH EMPLOYEE 
 
-
-
--- 123)  RETRIVE THE EMPLOYEE ID ,COMMISSION PCT SALARY AND SALARY + COMMISSION PCT AS TOTAL 
-
-
-
-
--- 124)  calculate the commission pct into RS format 
-
-
-
---125)  CALCULATE THE TOTAL SALARY GIVEN TO THE ALL SALARY GIVEN TO THE EMPLOYEES 
-
-
-
--- 126)  rename commissionn_pct to the commission_percentage
-
-
--- 127)   Retrieve the full name (concatenation of first name and last name) of the employeE
-
-
-
-
-
-
--- 128)    Retrieve the department name and the average salary of employees in each department.
-
-
-
-
-
-
-
--- 129)   Retrieve the first name, last name, and phone number of employees whose phone numbers contain '555' but not '123'.
-
-
--- 130)    Retrieve the first name, last name, and salary of employees whose salary is not between 5000 and 10000.
-
--- 131)    Retrieve the first name, last name, and salary of employees who work in the same department as employees with job titles 'Programmer'.
-
--- 132)   Retrieve the first name, last name, and email of employees whose email addresses do not contain 'gmail'.
-
-
-
--- 133)    Retrieve the first name, last name, and department name of employees who do not work in departments located in cities 'Seattle' or 'Denver'.
-
-SELECT E. FIRST_NAME , E.LAST_NAME ,D.DEPARTMENT_NAME,D.LOCATION_ID,L.CITY   
+-- ============================================================================
+-- QUESTION 133: Employees not in Seattle or Denver
+-- ============================================================================
+SELECT E.FIRST_NAME, E.LAST_NAME, D.DEPARTMENT_NAME, D.LOCATION_ID, L.CITY   
 FROM HR.EMPLOYEES E
-LEFT JOIN HR.DEPARTMENTS D 
-ON E.DEPARTMENT_ID = D.DEPARTMENT_ID
-LEFT JOIN HR.LOCATIONS L 
-ON D.LOCATION_ID = L.LOCATION_ID  
-WHERE CITY NOT IN ('Seattle','denver')
-SELECT * FROM HR.LOCATIONS
-SELECT * FROM HR.DEPARTMENTS
+LEFT JOIN HR.DEPARTMENTS D ON E.DEPARTMENT_ID = D.DEPARTMENT_ID
+LEFT JOIN HR.LOCATIONS L ON D.LOCATION_ID = L.LOCATION_ID  
+WHERE L.CITY NOT IN ('Seattle', 'Denver');
 
---   134)   Retrieve the first name, last name, and salary of employees who work in the same department as employee ID 102.
 
--- 135)   Retrieve the department name, average salary, and total number of employees in each department.
+-- ============================================================================
+-- Supporting SELECT statements for reference
+-- ============================================================================
+-- SELECT * FROM HR.LOCATIONS;
+-- SELECT * FROM HR.DEPARTMENTS;
+-- SELECT * FROM HR.REGIONS;
+-- SELECT * FROM HR.COUNTRIES;
+-- SELECT * FROM HR.JOBS;
 
 
+-- ============================================================================
+-- QUESTION 134: Employees in same department as employee ID 102
+-- ============================================================================
+-- TODO: Implement this query
 
 
--- 137)   (Using Subquery with EXISTS and NOT EXISTS:)Retrieve the first name, last name, and job title of employees who work in departments that have at least one manager and at least one employee.
+-- ============================================================================
+-- QUESTION 135: Department name, average salary, and employee count
+-- ============================================================================
+-- TODO: Implement this query
 
 
+-- ============================================================================
+-- QUESTION 137: Departments with at least one manager and employee
+-- ============================================================================
+/*
+Using subquery with EXISTS and NOT EXISTS
+Retrieve first name, last name, and job title of employees
+who work in departments that have at least one manager
+and at least one employee
+*/
+-- TODO: Implement this query
 
 
+-- ============================================================================
+-- QUESTION 138: Employees with same manager as employee ID 101 (self join)
+-- ============================================================================
+-- TODO: Implement this query
 
---138)     Retrieve the first name, last name, and salary of employees who have the same manager as employee ID 101.(using self join )
 
+-- ============================================================================
+-- QUESTION 138b: Department name and total salary by department
+-- ============================================================================
+-- TODO: Implement this query
 
 
+-- ============================================================================
+-- QUESTION 139: Department name and employee count by department
+-- ============================================================================
+-- TODO: Implement this query
 
--- 138)   Retrieve the department name and the total salary for each department.
 
+-- ============================================================================
+-- QUESTION 140: Departments with more than 5 employees (HAVING clause)
+-- ============================================================================
+-- TODO: Implement this query
 
 
+-- ============================================================================
+-- QUESTION 141: Departments with max salary > 8000 (GROUP BY clause)
+-- ============================================================================
+-- TODO: Implement this query
 
--- 139 )   Retrieve the department name and the number of employees in each department.
 
+-- ============================================================================
+-- GROUP BY AND HAVING CLAUSE
+-- ============================================================================
 
+-- ============================================================================
+-- QUESTION 142: Highest commission percentage by department
+-- ============================================================================
+-- TODO: Implement this query
 
 
--- 140)   Retrieve the department ID and the number of employees in each department, but only for departments with more than 5 employees.( use HAVING CLAUSE )
+-- ============================================================================
+-- QUESTION 143: Manager ID and sum of salary + commission
+-- ============================================================================
+-- TODO: Implement this query
 
 
+-- ============================================================================
+-- QUESTION 144: Minimum salary by department and job title combination
+-- ============================================================================
+-- TODO: Implement this query
 
 
+-- ============================================================================
+-- QUESTION 145: Job title and employee count by job category
+-- ============================================================================
+-- TODO: Implement this query
 
 
+-- ============================================================================
+-- ARITHMETIC OPERATIONS (DUAL)
+-- ============================================================================
 
+-- ============================================================================
+-- QUESTION 146: Addition and Subtraction (5 + 8 - 3)
+-- ============================================================================
+-- TODO: Implement this query with SELECT ... FROM DUAL
 
--- 141)   Retrieve the department ID and the maximum salary for departments where the maximum salary is greater than 8000.(USE GROUP BY )
 
+-- ============================================================================
+-- QUESTION 147: Multiplication and Division (10 * 4 / 2)
+-- ============================================================================
+-- TODO: Implement this query with SELECT ... FROM DUAL
 
 
+-- ============================================================================
+-- QUESTION 148: Complex Expression ((6 + 9) * 2 - 7)
+-- ============================================================================
+-- TODO: Implement this query with SELECT ... FROM DUAL
 
 
+-- ============================================================================
+-- QUESTION 149: Parentheses (20 / (4 + 2))
+-- ============================================================================
+-- TODO: Implement this query with SELECT ... FROM DUAL
 
 
+-- ============================================================================
+-- QUESTION 150: Mix of Operators (3 * 5 + 10 / 2)
+-- ============================================================================
+-- TODO: Implement this query with SELECT ... FROM DUAL
 
-                                                            -- GROUP BY AND HAVING CLAUSE --
 
--- 142)   Retrieve the department ID and the highest commission percentage among employees in each department.
+-- ============================================================================
+-- QUESTION 151: BODMAS (8 + 2 * 4)
+-- ============================================================================
+-- TODO: Implement this query with SELECT ... FROM DUAL
 
 
+-- ============================================================================
+-- QUESTION 152: Multiple Parentheses ((10 / (2 + 1)) + ((8 - 3) * 2))
+-- ============================================================================
+-- TODO: Implement this query with SELECT ... FROM DUAL
 
--- 143)    Retrieve the manager ID and the sum of salary and commission of all employees managed by each manager.
 
+-- ============================================================================
+-- QUESTION 153: Combining Expressions (15 + 6 / 3 - (4 * 2))
+-- ============================================================================
+-- TODO: Implement this query with SELECT ... FROM DUAL
 
 
---144)    Retrieve the department ID, job title, and the minimum salary among employees in each department and job title combination.
-
-
-
-
---145)   Retrieve the job title and the count of employees in each job title category.
- 
-
-
-
-                                       -- DUAL CHARTS PROBLEM S(SOLVE IN DUAL CHART )
-
---146)   Addition and Subtraction: Retrieve the result of 5 + 8 - 3.
-
-
---147)    Multiplication and Division:Retrieve the result of 10 * 4 / 2
-
-
---148)   Complex Expression:Retrieve the result of (6 + 9) * 2 - 7.
-
-
-
-
-
---149)    Parentheses:Retrieve the result of 20 / (4 + 2).
-
-
-
---150)    Mix of Operators:Retrieve the result of 3 * 5 + 10 / 2.
-
-
-
---151)   Using BODMAS in SQL Select Statement:Retrieve the result of 8 + 2 * 4.
- 
-
-
-
---152)    Using Multiple Parentheses:  Retrieve the result of (10 / (2 + 1)) + ((8 - 3) * 2).
-
-
-
-
-
----153)   Combining Expressions:  Retrieve the result of 15 + 6 / 3 - (4 * 2).
-
-
-
--- 154)    FIND PRESENT DATE AND TIME BY USING DUAL 
-
- 
-
-
-
-
-
+-- ============================================================================
+-- QUESTION 154: Find present date and time using DUAL
+-- ============================================================================
+-- TODO: Implement this query with SELECT ... FROM DUAL
